@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: local #default profile
+    group:
+      local:
+        - local
+      prd:
+        - prd
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+#    password: jasypt0612!
