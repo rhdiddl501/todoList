@@ -2,6 +2,9 @@ server:
   port: 8080
 
 spring:
+  config:
+    activate:
+      on-profile: prd
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ENC(YKdDHR/7vMxGksVEPVykhjdUyJjY1o4Uqg4hRIw9vhwvFklG2lGvheHRRKPFdAxxu8c518vBXOTdvmtREmt+ivOCqViNq3OsPvF2HCGDnlJ1rWAy0GUoKFrQ9lQjFZZv)

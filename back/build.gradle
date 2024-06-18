@@ -39,9 +39,55 @@ dependencies {
 
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-	systemProperty "jasypt.encryptor.password", project.getProperty("jasypt.encryptor.password")
-	systemProperty "spring.profiles.active", project.getProperty("spring.profiles.active")
+ext.profile = (!project.hasProperty('profile') || !profile) ? 'local' : profile
+
+tasks {
+	processResources {
+		duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
+	}
 }
 
+tasks.named('test') {
+	useJUnitPlatform()
+//	systemProperty "jasypt.encryptor.password", findProperty("jasypt.encryptor.password")
+//	systemProperty "spring.profiles.active", findProperty("spring.profiles.active")
+
+//	systemProperty "jasypt.encryptor.password", System.getProperty("jasypt.encryptor.password")
+//	systemProperty "spring.profiles.active", System.getProperty("spring.profiles.active")
+
+	systemProperty "jasypt.encryptor.password", project.getProperty("jasypt.encryptor.password")
+	systemProperty "spring.profiles.active", project.getProperty("spring.profiles.active")
+
+//	systemProperty "jasypt.encryptor.password", System.getProperties().get("jasypt.encryptor.password")
+//	setProperty( 'jasypt.encryptor.password', findProperty("jasypt.encryptor.password"))
+//	systemProperty 'spring.profiles.active', findProperty("spring.profiles.active")
+//	println("Hello1 " + project.getProperty("jasypt.encryptor.password"));
+//	println("Hello2 " + project.getProperty("spring.profiles.active"));
+
+}
+
+bootRun {
+	systemProperty "jasypt.encryptor.password", findProperty("jasypt.encryptor.password")
+	systemProperty "spring.profiles.active", findProperty("spring.profiles.active")
+}
+
+//build {
+//	systemProperty "jasypt.encryptor.password", findProperty("jasypt.encryptor.password")
+//	systemProperty "spring.profiles.active", findProperty("spring.profiles.active")
+//}
+
+//tasks.named('build') {
+//	System.setProperty("jasypt.encryptor.password", project.getProperty("jasypt.encryptor.password"));
+//	doLast {
+//		println("Hello1 " + project.getProperty("jasypt.encryptor.password"));
+//		println("Hello2 " + System.getProperty("jasypt.encryptor.password"));
+//	}
+////	systemProperty "spring.profiles.active", project.getProperty("spring.profiles.active")
+//}
+
+//tasks.named('build') {
+//	setProperty( 'jasypt.encryptor.password', findProperty("jasypt.encryptor.password"))
+//	setProperty( 'spring.profiles.active', findProperty("spring.profiles.active"))
+//	println("Hello1 " + project.getProperty("jasypt.encryptor.password"));
+//	println("Hello2 " + project.getProperty("spring.profiles.active"));
+//}

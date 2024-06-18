@@ -10,4 +10,3 @@ spring:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
-#    password: jasypt0612!
